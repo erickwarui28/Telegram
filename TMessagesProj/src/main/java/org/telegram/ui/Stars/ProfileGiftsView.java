@@ -345,51 +345,40 @@ public class ProfileGiftsView extends View implements NotificationCenter.Notific
             final float alpha = gift.animatedFloat.set(1.0f);
             final float scale = lerp(0.5f, 1.0f, alpha);
             final int index = i; // gifts.size() == maxCount ? i - 1 : i;
-            if (index == 0) {
+            if (index >= 0 && index <= 3) {
+                float[][] cornerOffsets = {
+                    { -1.25f, -0.55f },
+                    {  1.25f, -0.55f },
+                    {  1.25f,  0.55f },
+                    { -1.25f,  0.55f } 
+                };
+                float offsetX = cornerOffsets[index][0];
+                float offsetY = cornerOffsets[index][1];
+                float cornerRadius = ar + dp(7);
+                float giftCx = acx + offsetX * cornerRadius;
+                float giftCy = acy + offsetY * cornerRadius;
+                float rotate = (float)Math.toDegrees(Math.atan2(offsetY, offsetX)) + 90;
                 gift.draw(
                     canvas,
-                    (float) (acx + ar * Math.cos(-65 / 180.0f * Math.PI)),
-                    (float) (acy + ar * Math.sin(-65 / 180.0f * Math.PI)),
-                    scale, -65 + 90,
-                    alpha * (1.0f - expandProgress), lerp(0.9f, 0.25f, actionBarProgress)
-                );
-            } else if (index == 1) {
-                gift.draw(
-                    canvas,
-                    lerp(cacx + Math.min(getWidth() * .27f, dp(62)), cx, 0.5f * actionBarProgress), acy - dp(52),
-                    scale, -4.0f,
-                    alpha * alpha * (1.0f - expandProgress) * (1.0f - actionBarProgress) * (closedAlpha),
-                    1.0f
-                );
-            } else if (index == 2) {
-                gift.draw(
-                    canvas,
-                    lerp(cacx + Math.min(getWidth() * .46f, dp(105)), cx, 0.5f * actionBarProgress), acy - dp(72),
-                    scale, 8.0f,
+                    giftCx,
+                    giftCy,
+                    scale,
+                    rotate,
                     alpha * (1.0f - expandProgress) * (1.0f - actionBarProgress) * (closedAlpha),
                     1.0f
                 );
-            } else if (index == 3) {
+            } else if (index == 4 || index == 5) {
+                float side = index == 4 ? -1f : 1f;
+                float sideRadius = ar + dp(58);
+                float giftCx = acx + side * sideRadius;
+                float giftCy = acy;
+                float rotate = side == -1f ? 180f : 0f;
                 gift.draw(
                     canvas,
-                    lerp(cacx + Math.min(getWidth() * .60f, dp(136)), cx, 0.5f * actionBarProgress), acy - dp(46),
-                    scale, 3.0f,
-                    alpha * (1.0f - expandProgress) * (1.0f - actionBarProgress) * (closedAlpha),
-                    1.0f
-                );
-            } else if (index == 4) {
-                gift.draw(
-                    canvas,
-                    lerp(cacx + Math.min(getWidth() * .08f, dp(21.6f)), cx, 0.5f * actionBarProgress), acy - dp(82f),
-                    scale, -3.0f,
-                    alpha * (1.0f - expandProgress) * (1.0f - actionBarProgress) * (closedAlpha),
-                    1.0f
-                );
-            } else if (index == 5) {
-                gift.draw(
-                    canvas,
-                    lerp(cacx + Math.min(getWidth() * .745f, dp(186)), cx, 0.5f * actionBarProgress), acy - dp(39),
-                    scale, 2.0f,
+                    giftCx,
+                    giftCy,
+                    scale,
+                    rotate,
                     alpha * (1.0f - expandProgress) * (1.0f - actionBarProgress) * (closedAlpha),
                     1.0f
                 );

@@ -6245,6 +6245,7 @@
     <string name="StoriesSelected_other">%d Selected</string>
     <string name="StoryPhoto">Photo</string>
     <string name="StoryVideo">Video</string>
+    <string name="Video">Video</string>
     <string name="StoryPrivacyNone">None</string>
     <string name="StoryPrivacyRecipients_one">%d recipient</string>
     <string name="StoryPrivacyRecipients_other">%d recipients</string>
